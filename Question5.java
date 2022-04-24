@@ -27,6 +27,30 @@ public class Question5
      */
      
     Scanner in = new Scanner(System.in);
+    System.out.println("Enter a number: ");
+    int num = in.nextInt();
+    List<Integer> numList = new ArrayList<Integer>();
+    for (int i = 0; i < num; i++) {
+        System.out.println("Enter a number again: ");
+        int no = in.nextInt();
+        numList.add(no);
+    }
+
+    for (int i = 0; i < numList.size(); i++) {
+        int count = 0;
+        for (int j = 0; j < numList.size(); j++) {
+            if (numList.get(i) == numList.get(j)) {
+                count++;
+            }
+        }
+    }
+
+    Integer mostOccurred = numList.stream()
+            .reduce(
+                    BinaryOperator.maxBy(
+                            (o1, o2) -> Collections.frequency(numList, o1) - Collections.frequency(numList, o2)))
+            .orElse(null);
+    System.out.println(mostOccurred + " has the highest occurence");
     
   }
 }
